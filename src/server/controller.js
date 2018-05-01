@@ -15,8 +15,9 @@ module.exports = function (db, io) {
      * @return {Pagination<User>}
      */
     function fillUsersWithStatus(users) {
-        users.items = users.items.map((user) => ({...user, online: Boolean(ONLINE[user._id])}));
-
+        users.items = users.items.map((user) => {
+            return ({...user, online: Boolean(ONLINE[user._id])});
+        });
         return users;
     }
 
@@ -136,6 +137,7 @@ module.exports = function (db, io) {
         requestResponse(TYPES.USERS, async (params) => {
             return fillUsersWithStatus(await getUsers(db, params || {}));
         });
+
         // Return user by name
         requestResponse(TYPES.USER_BY_NAME, async (params) => {
             let {sid} = socket.request.cookies;
@@ -146,6 +148,7 @@ module.exports = function (db, io) {
         requestResponse(TYPES.CHECK_AUTH, async () => {
             let {sid} = socket.request.cookies;
             console.log("sid from controller.js", sid);
+
             return await getUserBySid(db, sid);
         });
 
@@ -237,7 +240,7 @@ module.exports = function (db, io) {
             let rooms = await getUserRooms(db, user._id);
 
             rooms.items.forEach((room) => {
-                joinToRoomChannel(db, room._id);
+                joinToRoomChannel(room._id);
             });
         });
 
