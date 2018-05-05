@@ -1,24 +1,27 @@
-import React from 'react';
-import './HeaderTemplate.css';
-import '../ChatTitle/ChatName/ChatName'
+import React from "react";
+import PropTypes from "prop-types";
 
-class HeaderTemplate extends React.Component {
+import "./HeaderTemplate.css";
+import "../ChatTitle/ChatName/ChatName";
 
-
-  render() {
-
-    return(
-        <div className="HeaderTemplate">
-          <div className="button button-1">
-            <i className={this.props.leftButtonClass}></i>
-          </div>
-          <h2>{this.props.title}</h2>
-          <div className="button button-2">
-            <i className={this.props.rightButtonClass}></i>
-          </div>
-        </div>
-    );
-  }
+export class HeaderTemplate extends React.Component {
+    render() {
+        return(
+            <div className="header-template">
+                <div className="header-template__button">
+                    <i className={this.props.leftButtonClass}/>
+                </div>
+                <h2>{this.props.title}</h2>
+                <div className="header-template__button">
+                    <i className={this.props.rightButtonClass}/>
+                </div>
+            </div>
+        );
+    }
 }
 
-export default HeaderTemplate;
+HeaderTemplate.propTypes = {
+    title: PropTypes.string,
+    rightButtonClass: PropTypes.string,
+    leftButtonClass: PropTypes.string
+};

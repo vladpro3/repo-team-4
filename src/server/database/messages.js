@@ -71,12 +71,14 @@ async function getMessages(db, filter) {
         }
     });
 
+    const nextMessages = filter["lastId"] ? "$lt" : null;
+
     return pageableCollection(db.collection(TABLE), {
         ...filter,
         order: {
             "created_at": -1
         }
-    });
+    }, nextMessages);
 }
 
 module.exports = {

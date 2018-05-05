@@ -240,7 +240,7 @@ module.exports = function (db, io) {
             let rooms = await getUserRooms(db, user._id);
 
             rooms.items.forEach((room) => {
-                joinToRoomChannel(room._id);
+                joinToRoomChannel(db, room._id);
             });
         });
 

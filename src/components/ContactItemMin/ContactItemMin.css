@@ -1,4 +1,4 @@
-.contactItemMin {
+.contact-item-min {
   width: 100%;
   height: 45px;
   background: #fff;
@@ -11,7 +11,7 @@
   margin-bottom: 0.5em;
 }
 
-.contactItemMin.selected{
+.contact-item-min.selected{
     animation: select 0.2s;
     box-shadow: 0 -3px 0 #f25a41 inset;
 }
@@ -25,11 +25,11 @@
     }
 }
 
-.contactItemMin .contactItemMin__leftInfo {
+.contact-item-min__left-info {
   display: flex;
   justify-content: space-around;
 }
-.contactItemMin .contactItemMin__leftInfo .contactItemMin__leftInfo__avatar {
+.contact-item-min__left-info__avatar {
   height: 36px;
   width: 36px;
   min-width: 36px;
@@ -37,12 +37,12 @@
   background: #f00;
   margin: 0 15px;
 }
-.contactItemMin .contactItemMin__leftInfo .contactItemMin__leftInfo__userInfo {
+.contact-item-min__left-info__user-info {
   display: flex;
   flex-direction: column;
   text-align: left;
 }
-.contactItemMin .contactItemMin__leftInfo .contactItemMin__leftInfo__userInfo .contactItemMin__leftInfo__userInfo__name {
+.contact-item-min__left-info__user-info__name {
   font-family: Roboto;
   font-size: 14px;
   line-height: 19px;
@@ -50,26 +50,26 @@
   font-weight: 700;
   white-space: nowrap;
 }
-.contactItemMin .contactItemMin__leftInfo .contactItemMin__leftInfo__userInfo .contactItemMin__leftInfo__userInfo__lastMessage {
+.contact-item-min__left-info__user-info__last-message {
   font-family: Roboto;
   font-size: 14px;
   color: #000;
   line-height: 19px;
   white-space: nowrap;
 }
-.contactItemMin .contactItemMin__newMessages {
+.contact-item-min__new-messages {
   margin-right: 15px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   width: 30%;
 }
-.contactItemMin .contactItemMin__newMessages .contactItemMin__newMessages__date {
+.contact-item-min__new-messages__date {
   font-family: Roboto;
   font-size: 12px;
   color: #f25a41;
 }
-.contactItemMin .contactItemMin__newMessages .contactItemMin__newMessages__quantity {
+.contact-item-min__new-messages__quantity {
   height: 22px;
   width: 22px;
   background: #f25a41;

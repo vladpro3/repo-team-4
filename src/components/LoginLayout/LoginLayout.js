@@ -1,29 +1,36 @@
 import React from "react";
-import "./LoginLayout.css";
+import PropTypes from "prop-types";
 import {connect} from "react-redux";
+
+import "./LoginLayout.css";
 import {changeLayout} from "../../reducers/navigation/action";
 import {authorization} from "../../reducers/authorization/action";
 import {loginButtonHandler} from "../../reducers/authorization/action";
 
-import PropTypes from "prop-types";
 import api from "../../api";
 
 class LoginLayout extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loading: true
-        };
-    }
+    state = {
+        loading: true
+    };
 
     componentWillMount() {
         this.props.authorization();
     }
 
-    onLoginClick() {
+    onLoginClick = () => {
+        // const newUser = {
+        //     email : "Bondarovich77@gmail.com",
+        //     name : "Бондарович Влад",
+        //     password : "228",
+        //     phone : "(111)272-34-44",
+        //     photo : "https://image.ibb.co/nA0sES/photo_2018_05_05_16_35_30.jpg"
+        // };
+        // const u = api.saveUser(newUser);
+        // console.log('----', u);
         api.getUsers({limit: 20}).then((user) => console.log(user));
         this.props.loginButtonHandler(document.getElementById("login").value);
-    }
+    };
 
     render() {
         return (
@@ -31,12 +38,10 @@ class LoginLayout extends React.Component {
                 <div className='loginContainer'>
                     <div className='inputContainer'>
                         <span>Логин:</span>
-                        <input id='login' type='text'>
-
-                        </input>
+                        <input id='login' type='text'/>
                     </div>
                     <div className='buttonContainer'>
-                        <div className='button' onClick={this.onLoginClick.bind(this)}>Войти</div>
+                        <div className='button' onClick={() => this.onLoginClick()}>Войти</div>
                     </div>
                 </div>
             </div>

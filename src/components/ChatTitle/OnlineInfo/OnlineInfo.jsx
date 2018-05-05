@@ -1,20 +1,21 @@
-import React from 'react';
-import './OnlineInfo.css';
+import React from "react";
+import PropTypes from "prop-types";
 
-class OnlineInfo extends React.Component {
+import "./OnlineInfo.css";
 
-  render() {
-    if(this.props.online){
-      return(
-          <span>Online</span>
-      );
+export class OnlineInfo extends React.Component {
+    render() {
+        if (this.props.online)
+            return (
+                <span>Online</span>
+            );
+        else return (
+            <span>Last visit: {this.props.time}</span>
+        );
     }
-    else{
-      return(
-          <span>Last visit: {this.props.time}</span>
-      );
-    }
-  }
 }
 
-export default OnlineInfo;
+OnlineInfo.propTypes = {
+    time: PropTypes.string,
+    online: PropTypes.bool
+};

@@ -1,8 +1,9 @@
 import React from "react";
-import { connect } from "react-redux";
-import { changeLayout } from "../../reducers/navigation/action";
-import { getRoomUsers, getContacts, addUsers, leaveRoom } from "../../reducers/chat/action";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+
+import {changeLayout} from "../../reducers/navigation/action";
+import {getRoomUsers, getContacts, addUsers, leaveRoom} from "../../reducers/chat/action";
 import ChatSettingsHeader from "../ChatSettingsHeader/ChatSettingsHeader";
 import ChatContactItem from "../ChatContactItem/ChatContactItem";
 import ContactItemMin from "../ContactItemMin/ContactItemMin";
@@ -21,7 +22,7 @@ class ChatSettingsLayout extends React.Component {
     addSelectedUsers = () => {
         this.props.addUsers(this.props.pickedUsers, this.props.roomId);
         this.props.getRoomUsers(this.props.roomId);
-        this.setState({ addList: false });
+        this.setState({addList: false});
     };
 
     showAddList = () => {
@@ -29,6 +30,7 @@ class ChatSettingsLayout extends React.Component {
         this.props.roomUsers.forEach((elem) => {
             arr.push(elem._id);
         });
+
         this.setState({
             addList: true,
             roomUsersId: arr
@@ -71,7 +73,7 @@ class ChatSettingsLayout extends React.Component {
                     <div className='container'>
                         <span>Выделите людей, которых хотите пригласить:</span>
                         <div className='contactList'>
-                            {users && users.map(function (user) {
+                            {users && users.map((user) => {
                                 if (roomUsersId.indexOf(user._id) === -1)
                                     return <ContactItemMin
                                         sizeAvatar={"small"}
@@ -79,12 +81,13 @@ class ChatSettingsLayout extends React.Component {
                                         name={user.name}
                                         userId={user._id}
                                     />;
+                                return null;
                             })}
                         </div>
                     </div>
                     <div className='buttonContainer'>
                         <div className='button' onClick={() => this.addSelectedUsers()}>Добавить</div>
-                        <div className='button' onClick={() => this.setState({ addList: false })}>Отмена</div>
+                        <div className='button' onClick={() => this.setState({addList: false})}>Отмена</div>
                     </div>
                 </div>}
             </div>

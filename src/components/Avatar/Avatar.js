@@ -1,9 +1,11 @@
 import React, {Component} from "react";
-import avatar_img from "./default-avatar.png";
-import "./Avatar.css";
 import PropTypes from "prop-types";
 
-class Avatar extends Component {
+import avatar_img from "./default-avatar.png";
+import "./Avatar.css";
+
+
+export class Avatar extends Component {
     constructor(props) {
         super(props);
 
@@ -27,10 +29,8 @@ class Avatar extends Component {
         );
     }
 }
+
 Avatar.propTypes = {
     size: PropTypes.string,
     url: PropTypes.string
-
 };
-
-export default Avatar;

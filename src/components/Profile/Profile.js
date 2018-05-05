@@ -1,15 +1,15 @@
 import React, {Component} from "react";
+import {connect} from "react-redux";
+import PropTypes from "prop-types";
+
 import "./Profile.css";
 import ProfileHeader from "./ProfileHeader";
-import Avatar from "../Avatar/Avatar";
-import PropTypes from "prop-types";
+import {Avatar} from "../Avatar/Avatar";
 import {changeLayout} from "../../reducers/navigation/action";
-import {connect} from "react-redux";
 import {getCurrentUserInfo} from "../../reducers/currentUser/action";
 
 class Profile extends Component {
-
-    componentWillMount(){
+    componentWillMount() {
         this.props.getCurrentUserInfo();
     }
 

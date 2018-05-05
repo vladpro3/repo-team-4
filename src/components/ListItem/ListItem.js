@@ -1,34 +1,28 @@
 import React, {Component} from "react";
-import "./ListItem.css";
-import Avatar from "../Avatar/Avatar";
-import {connect} from "react-redux";
-import {joinExistingChat} from "../../reducers/chat/action";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 
+import "./ListItem.css";
+import {Avatar} from "../Avatar/Avatar";
+import {joinExistingChat} from "../../reducers/chat/action";
 
 class ListItem extends Component {
-
-    clickHandler() {
+    clickHandler = () => {
         this.props.joinExistingChat(this.props.roomId);
-    }
-
+    };
 
     render() {
-        let currentTime = new Date();
+        let currentTime = new Date(), dateMessage, lastMessage = this.props.lastMessage;
+        const date = this.props.date;
 
-        let dateMessage;
-        let lastMessage = this.props.lastMessage;
-        if ((currentTime - this.props.date) < (1000 * 60)) {
+        if ((currentTime - date) < (1000 * 60))
             dateMessage = "Только что";
-        }
-        else if ((currentTime - this.props.date) < (5000 * 60)) {
+        else if ((currentTime - date) < (5000 * 60))
             dateMessage = "Минуту назад";
-        }
-        else if ((currentTime - this.props.date) < (7000 * 60)) {
+        else if ((currentTime - date) < (7000 * 60))
             dateMessage = "5 минут назад";
-        }
         else {
-            let messageDate = new Date(this.props.date);
+            let messageDate = new Date(date);
             let day = messageDate.getDate() < 10 ? "0" + messageDate.getDate() : messageDate.getDate();
             let month = messageDate.getMonth();
             month++;
@@ -37,10 +31,8 @@ class ListItem extends Component {
             let minutes = messageDate.getMinutes() < 10 ? "0" + messageDate.getMinutes() : messageDate.getMinutes();
             let seconds = messageDate.getSeconds() < 10 ? "0" + messageDate.getSeconds() : messageDate.getSeconds();
 
-            let fullDate = (day + "." + month + " " + hour + ":" + minutes + ":" + seconds);
-            dateMessage = fullDate;
+            dateMessage = (day + "." + month + " " + hour + ":" + minutes + ":" + seconds);
         }
-
 
         if (!this.props.lastMessage) {
             dateMessage = "";
@@ -48,39 +40,36 @@ class ListItem extends Component {
         }
 
         let chatName = this.props.name;
-        if(chatName && chatName.split(", ").length>1){
+        if (chatName && chatName.split(", ").length > 1)
             chatName.split(", ").forEach((name) => {
-                if(name!==this.props.currentUser.name){
+                if (name !== this.props.currentUser.name)
                     chatName = name;
-                }
             });
-        }
 
         return (
-            <div className="listItem" onClick={this.clickHandler.bind(this)}>
-                <div className="listItem__leftInfo">
+            <div className="list-item" onClick={() => this.clickHandler()}>
+                <div className="list-item__left-info">
                     <Avatar size={this.props.sizeAvatar} url={this.props.urlAvatar}/>
-                    <div className="listItem__leftInfo__userInfo">
-                        <span className="listItem__leftInfo__userInfo__name">
+                    <div className="list-item__left-info__user-info">
+                        <span className="list-item__left-info__user-info__name">
                             {chatName}
                         </span>
-                        <span className="listItem__leftInfo__userInfo__lastMessage">
+                        <span className="list-item__left-info__user-info__last-message">
                             {lastMessage}
                         </span>
                     </div>
                 </div>
 
-                <div className="listItem__newMessages">
-                    <span className="listItem__newMessages__date">
+                <div className="list-item__new-messages">
+                    <span className="list-item__new-messages__date">
                         {dateMessage}
                     </span>
-                    
                 </div>
-
             </div>
         );
     }
 }
+
 ListItem.propTypes = {
     joinExistingChat: PropTypes.func,
     roomId: PropTypes.string,

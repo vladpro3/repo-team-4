@@ -1,19 +1,23 @@
 import React, {Component} from "react";
-
-import Avatar from "../Avatar/Avatar";
-import Balloon from "../Balloon/Balloon";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 
+import {Avatar} from "../Avatar/Avatar";
+import {Balloon} from "../Balloon/Balloon";
 import "./Message.css";
 
-export class Message extends Component {
+class Message extends Component {
     render() {
-
+        let avatars = this.props.usersAvatars[this.props.usersAvatars.indexOf(this.props.userId) + 1];
+        if (avatars && !~avatars.indexOf("http://") && !~avatars.indexOf("https://"))
+            avatars = null;
         return (
             <div className={this.props.isMyMessage ?
                 "outgoing-message  messages-layout__message" : "incoming-message messages-layout__message"}>
-                <Avatar size='small'/>
-                <Balloon message={this.props.message.message} typeMessage={!this.props.isMyMessage} dateMessage={this.props.message.created_at}/>
+                {!avatars && <Avatar size='small'/>}
+                {avatars && <Avatar size='small' url={avatars}/>}
+                <Balloon message={this.props.message.message} typeMessage={!this.props.isMyMessage}
+                    dateMessage={this.props.message.created_at}/>
             </div>
         );
     }
@@ -22,5 +26,12 @@ export class Message extends Component {
 Message.propTypes = {
     isMyMessage: PropTypes.bool,
     url: PropTypes.string,
-    message: PropTypes.object
+    message: PropTypes.object,
+    usersAvatars: PropTypes.array,
+    userId: PropTypes.string
 };
+
+export default connect(
+    state => ({
+        usersAvatars: state.chat.usersAvatars
+    }), {})(Message);

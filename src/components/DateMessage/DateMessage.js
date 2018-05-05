@@ -1,21 +1,21 @@
 import React, {Component} from "react";
-import "./dataMessage.css";
 import PropTypes from "prop-types";
 
+import "./dataMessage.css";
 
-class DateMessage extends Component {
+export class DateMessage extends Component {
     render() {
         return (
-            <div className='balloon__data-message' date-message=''>
+            <div className='balloon__data-message'>
                 <span className='data-message'>
                     {this.props.dateMessage}
                 </span>
-                <span className='data-message'></span>
+                <span className='data-message'/>
             </div>
         );
     }
 }
+
 DateMessage.propTypes = {
     dateMessage: PropTypes.string
 };
-export default DateMessage;

@@ -1,12 +1,11 @@
-.online::after{
-  content: '';
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  -moz-border-radius: 7.5px;
-  -webkit-border-radius: 7.5px;
-  border-radius: 7.5px;
-  background-color: #69b6d5;
-  margin: 0.1em;
-  margin-bottom: 0.5em;
+.online::after {
+    content: '';
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background-color: #69b6d5;
+    margin: 0.1em 0.1em 0.5em;
 }

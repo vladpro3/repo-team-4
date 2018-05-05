@@ -1,21 +1,18 @@
 import React, {Component} from "react";
-
-import Header from "../Header/Header";
-import SendMessage from "../SendMessage/SendMessage";
-import {Message} from "../Message/Message";
-import "./MessagesLayout.css";
-import api from "../../api";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {getRoomMessages, joinChat} from "../../reducers/chat/action";
+
+import "./MessagesLayout.css";
+import Header from "../Header/Header";
+import SendMessage from "../SendMessage/SendMessage";
+import Message from "../Message/Message";
+import {getNextMessages, getRoomMessages, getUsersAvatars, joinChat} from "../../reducers/chat/action";
+
+import api from "../../api";
+import {Spinner} from "../Loaders/Spinner/Spinner";
+import {InlineLoader} from "../Loaders/InlineLoader/InlineLoader";
 
 class MessagesLayout extends Component {
-    /**
-     * todo: передавать в балун Timestamp сообщения в формате 'hh:mm', реализовать поддержку
-     * todo: получать аватар пользователя в зависимости от его id. Для этого добавить в сущность User поле 'Avatar'
-     * todo: получать аватарку получив информацию о юзере. userId брать из сообщения
-     */
-
     state = {
         messages: [],
         currentUserId: "",
@@ -24,46 +21,54 @@ class MessagesLayout extends Component {
     };
 
     componentDidMount() {
-        console.log("getRoomMessages");
+        this.props.getUsersAvatars(this.props.roomId);
         this.props.getRoomMessages(this.props.roomId);
-
 
         api.getCurrentUser()
             .then((user) => {
                 const currentUser = user._id;
                 this.setState({currentUserId: currentUser});
             });
-        api.getRoom(this.props.roomId).then((room) => {
-            this.setState({
-                room: room
+        api.getRoom(this.props.roomId)
+            .then((room) => {
+                this.setState({room: room});
             });
-        });
     }
 
     componentDidUpdate() {
-        document.getElementById("messages-layout__messages")
-            .scrollTo(0, document.getElementById("messages-layout__messages").scrollHeight);
+        if (!this.props.inlineLoading) {
+            if (this.props.scrollPosition === -1) document.getElementById("messages-layout__messages")
+                .scrollTo(0, document.getElementById("messages-layout__messages").scrollHeight);
+            else document.getElementById("messages-layout__messages").scrollTo(0, this.props.scrollPosition);
+        }
     }
+
+    onScrollHandler = () => {
+        let scrolled = window.pageYOffset || document.getElementById("messages-layout__messages").scrollTop;
+        if (scrolled === 0 && this.props.messagesNext)
+            this.props.getNextMessages();
+    };
 
     render() {
         let messages = this.props.messages;
         let currentUserId = this.state.currentUserId;
-        let myAvatar = this.state.myAvatar;
-        let incomingMessageAvatar = this.state.incomingMessageAvatar;
         let roomData = this.state.room;
+        let isLoading = this.props.loading;
+
         return (
             <div className='messages-layout'>
                 <div className='messages-layout__header'>
                     <Header chatName={roomData && roomData.name}/>
                 </div>
-                <div className='messages-layout__messages' id='messages-layout__messages'>
-                    {messages && messages.map(function (message) {
+                {this.props.inlineLoading && <InlineLoader/>}
+                <div className='messages-layout__messages' id='messages-layout__messages' onScroll={() => this.onScrollHandler()}>
+                    {isLoading && <Spinner/>}
+                    {!isLoading && messages && messages.map(function (message) {
                         return <Message
                             key={message._id}
-                            url={message.userId === currentUserId ? myAvatar : incomingMessageAvatar}
                             message={message}
                             isMyMessage={message.userId === currentUserId}
-                            userId = {message.userId}
+                            userId={message.userId}
                         />;
                     })}
                 </div>
@@ -74,17 +79,31 @@ class MessagesLayout extends Component {
         );
     }
 }
+
 MessagesLayout.propTypes = {
     getRoomMessages: PropTypes.func,
+    getNextMessages: PropTypes.func,
+    getUsersAvatars: PropTypes.func,
     roomId: PropTypes.string,
-    messages: PropTypes.array
+    messages: PropTypes.array,
+    messagesNext: PropTypes.object,
+    scrollPosition: PropTypes.number,
+    loading: PropTypes.bool,
+    inlineLoading: PropTypes.bool
 };
+
 export default connect(
     state => ({
         roomId: state.chat.currentChatId,
-        messages: state.chat.messages
+        messages: state.chat.messages,
+        messagesNext: state.chat.messagesNext,
+        scrollPosition: state.chat.scrollPosition,
+        loading: state.chat.loading,
+        inlineLoading: state.chat.inlineLoading
     }), {
         joinChat,
-        getRoomMessages
+        getRoomMessages,
+        getNextMessages,
+        getUsersAvatars
     }
 )(MessagesLayout);

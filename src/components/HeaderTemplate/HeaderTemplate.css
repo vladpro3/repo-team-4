@@ -1,4 +1,4 @@
-.HeaderTemplate {
+.header-template {
     font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: row;
@@ -11,10 +11,10 @@
     align-items: center;
 }
 
-.header h2 {
+.header-template h2 {
     margin-top: 0;
 }
 
-.button {
+.header-template__button {
     align-self: center;
 }
