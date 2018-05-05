@@ -2,7 +2,7 @@
   "name": "shri-boilerplate",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001/",
+  "proxy": "http://localhost:8080/",
   "dependencies": {
     "babel-eslint": "^8.2.3",
     "concurrently": "^3.5.1",
@@ -31,6 +31,7 @@
     "eject": "react-scripts eject",
     "client": "react-scripts start",
     "server": "nodemon -w server.js -w src/server server.js",
+    "server-prod": "node server.js",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
     "lint": "eslint ."
