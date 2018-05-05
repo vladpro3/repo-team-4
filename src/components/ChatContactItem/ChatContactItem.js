@@ -1,20 +1,21 @@
-import React, { PureComponent } from "react";
-import Avatar from "../Avatar/Avatar";
-import "../ContactItemMin/ContactItemMin.css";
-import { connect } from "react-redux";
+import React, {PureComponent} from "react";
+import {connect} from "react-redux";
 import PropTypes from "prop-types";
+
+import {Avatar} from "../Avatar/Avatar";
+import "../ContactItemMin/ContactItemMin.css";
 
 class ChatContactItem extends PureComponent {
     render() {
         return (
-            <div className="contactItemMin">
-                <div className="contactItemMin__leftInfo">
+            <div className="contact-item-min">
+                <div className="contact-item-min__left-info">
                     <Avatar size={this.props.sizeAvatar} url={this.props.urlAvatar}/>
-                    <div className="contactItemMin__leftInfo__userInfo">
-                        <span className="contactItemMin__leftInfo__userInfo__name">
+                    <div className="contact-item-min__left-info__user-info">
+                        <span className="contact-item-min__left-info__user-info__name">
                             {this.props.name}
                         </span>
-                        <span className="contactItemMin__leftInfo__userInfo__lastMessage">
+                        <span className="contact-item-min__left-info__user-info__last-message">
                             {this.props.lastMessage}
                         </span>
                     </div>

@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+
 import "./App.css";
 import Contacts from "../Contacts/Contacts";
-import {connect} from "react-redux";
 import {changeLayout} from "../../reducers/navigation/action";
 import LoginLayout from "../LoginLayout/LoginLayout";
 import ChatListLayout from "../ChatListLayout/ChatListLayout";
@@ -14,6 +15,7 @@ import ChatSettingsLayout from "../ChatSettingsLayout/ChatSettingsLayout";
 class App extends Component {
     render() {
         let layout;
+
         switch (this.props.layout) {
         case "authorization":
             layout = <LoginLayout/>;
@@ -41,7 +43,6 @@ class App extends Component {
             break;
         }
 
-
         return (
             <div className="App">
                 {layout}
@@ -53,6 +54,7 @@ class App extends Component {
 App.propTypes = {
     layout: PropTypes.string
 };
+
 export default connect(
     state => ({
         layout: state.navigation.layout

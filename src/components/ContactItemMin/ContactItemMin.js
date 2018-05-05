@@ -1,35 +1,34 @@
 import React, {PureComponent} from "react";
-import Avatar from "../Avatar/Avatar";
-import "./ContactItemMin.css";
 import {connect} from "react-redux";
-import {joinChat, pickUser} from "../../reducers/chat/action";
 import PropTypes from "prop-types";
 
+import "./ContactItemMin.css";
+import {Avatar} from "../Avatar/Avatar";
+import {joinChat, pickUser} from "../../reducers/chat/action";
 
 class contactItemMin extends PureComponent {
-    clickHandler() {
+    clickHandler = () => {
         this.props.pickUser(this.props.pickedUsers, this.props.userId);
-
         let nodeClass = this.node.className;
-        if(!nodeClass.includes("selected")){
+
+        if (!nodeClass.includes("selected"))
             this.node.className = nodeClass.concat(" selected");
-        }
-        else{
-            this.node.className = "contactItemMin";
-        }
-    }
+        else
+            this.node.className = "contact-item-min";
+    };
 
     render() {
         return (
-
-            <div className="contactItemMin" onClick={this.clickHandler.bind(this)} ref={(node) => { this.node = node; }}>
-                <div className="contactItemMin__leftInfo">
+            <div className="contact-item-min" onClick={() => this.clickHandler()} ref={(node) => {
+                this.node = node;
+            }}>
+                <div className="contact-item-min__left-info">
                     <Avatar size={this.props.sizeAvatar} url={this.props.urlAvatar}/>
-                    <div className="contactItemMin__leftInfo__userInfo">
-                        <span className="contactItemMin__leftInfo__userInfo__name">
+                    <div className="contact-item-min__left-info__user-info">
+                        <span className="contact-item-min__left-info__user-info__name">
                             {this.props.name}
                         </span>
-                        <span className="contactItemMin__leftInfo__userInfo__lastMessage">
+                        <span className="contact-item-min__left-info__user-info__last-message">
                             {this.props.lastMessage}
                         </span>
                     </div>
@@ -39,6 +38,7 @@ class contactItemMin extends PureComponent {
         );
     }
 }
+
 contactItemMin.propTypes = {
     joinChat: PropTypes.func,
     userId: PropTypes.string,

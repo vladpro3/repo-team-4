@@ -1,4 +1,4 @@
-.ChatListHeader {
+.chat-list-header {
     font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: row;
@@ -17,10 +17,10 @@
     box-sizing: border-box;
 }
 
-.header h2 {
+.chat-list-header h2 {
     margin-top: 0;
 }
 
-.button {
+.chat-list-header__button {
     align-self: center;
 }

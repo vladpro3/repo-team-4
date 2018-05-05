@@ -1,42 +1,41 @@
 import React, {PureComponent} from "react";
-import Avatar from "../Avatar/Avatar";
-import "./ContactItem.css";
-import {connect} from "react-redux";
-import {joinChat} from "../../reducers/chat/action";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+
+import "./ContactItem.css";
+import {Avatar} from "../Avatar/Avatar";
+import {joinChat} from "../../reducers/chat/action";
 import {getCurrentUserInfo} from "../../reducers/currentUser/action";
 
-
 class ContactItem extends PureComponent {
-
-    componentWillMount(){
+    componentWillMount() {
         this.props.getCurrentUserInfo();
+
     }
 
-    clickHandler() {
+    clickHandler = () => {
         this.props.joinChat(this.props.userId, this.props.currentUser);
-    }
+    };
 
     render() {
         return (
-
-            <div className="listItem" onClick={this.clickHandler.bind(this)}>
-                <div className="listItem__leftInfo">
+            <div className="list-item" onClick={() => this.clickHandler()}>
+                <div className="list-item__left-info">
                     <Avatar size={this.props.sizeAvatar} url={this.props.urlAvatar}/>
-                    <div className="listItem__leftInfo__userInfo">
-                        <span className="listItem__leftInfo__userInfo__name">
+                    <div className="list-item__left-info__user-info">
+                        <span className="list-item__left-info__user-info__name">
                             {this.props.name}
                         </span>
-                        <span className="listItem__leftInfo__userInfo__lastMessage">
+                        <span className="list-item__left-info__user-info__last-message">
                             {this.props.lastMessage}
                         </span>
                     </div>
                 </div>
             </div>
-
         );
     }
 }
+
 ContactItem.propTypes = {
     joinChat: PropTypes.func,
     userId: PropTypes.string,

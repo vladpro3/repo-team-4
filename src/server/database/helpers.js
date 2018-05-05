@@ -13,12 +13,18 @@ const {ObjectId} = require("mongodb");
  * Create pagination
  *
  * @param {Collection} collection
+ * @param nextMessages
  * @param filter
  */
-async function pageableCollection(collection, {lastId, order, limit = 10, ...query} = {}) {
+async function pageableCollection(collection, {lastId, order, limit = 10, ...query} = {}, nextMessages) {
     let count = await collection.find(query).count();
 
-    if (lastId) {
+    if (lastId && nextMessages) {
+        query._id = {
+            [nextMessages]: ObjectId(lastId.toString())
+        };
+    }
+    else if (lastId) {
         query._id = {
             $gt: ObjectId(lastId.toString())
         };

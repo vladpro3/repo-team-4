@@ -1,17 +1,20 @@
-import React from 'react';
-import './NumberOfUsers.css';
+import React from "react";
+import PropTypes from "prop-types";
 
-class NumberOfUsers extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {online: true};
-  }
+import "./NumberOfUsers.css";
 
-  render() {
-    return(
-        <span>Members: {this.props.number}</span>
-    );
-  }
+export class NumberOfUsers extends React.Component {
+    state = {
+        online: true
+    };
+
+    render() {
+        return(
+            <span>Members: {this.props.number}</span>
+        );
+    }
 }
 
-export default NumberOfUsers;
+NumberOfUsers.propTypes = {
+    number: PropTypes.number
+};

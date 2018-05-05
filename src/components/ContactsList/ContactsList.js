@@ -3,26 +3,19 @@ import "./ContactsList.css";
 import ContactItem from "../ContactItem/ContactItem";
 import {connect} from "react-redux";
 import {getContacts} from "../../reducers/chat/action";
-import Spinner from "../Loaders/Spinner/Spinner";
+import {Spinner} from "../Loaders/Spinner/Spinner";
 import PropTypes from "prop-types";
 
 class ContactsList extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
+    state = {};
 
     componentDidMount() {
         this.props.getContacts(this.props.currentUser);
     }
 
     render() {
-        if (this.props.loading) {
-            return (
-                <Spinner/>
-            );
-        }
+        if (this.props.loading)
+            return <Spinner/>;
 
         let users = this.props.users;
         return (
@@ -37,8 +30,6 @@ class ContactsList extends React.Component {
                 })}
             </div>
         );
-
-
     }
 }
 

@@ -1,6 +1,5 @@
 import api from "../../api";
 
-//TODO При создании часа с контактом создать на его стороне тоже
 export function joinChat(userId, currentUser) {
     return (dispatch) => {
         // api.getUsers({limit:20}).then((user)=>console.log(user));
@@ -70,7 +69,6 @@ export function getRooms() {
         dispatch({type: "GET_ROOMS"});
         api.getCurrentUserRooms()
             .then((rooms) => {
-
                 Promise.all(rooms.items.map(setLastMessageToRoom)).then(() => {
                     rooms.items.sort(compareRooms);
                     dispatch({
@@ -80,25 +78,47 @@ export function getRooms() {
                 }).catch(() => {
                     dispatch({type: "GET_ROOMS_FAIL"});
                 });
-
             });
-
     };
 }
 
 export function getRoomMessages(roomId) {
-    console.log("getroom messages run here");
     return (dispatch) => {
         dispatch({type: "GET_MESSAGES"});
         api.getRoomMessages(roomId)
             .then((messages) => {
                 dispatch({
                     type: "GET_MESSAGES_SUCCESS",
-                    messages: messages.items.reverse()
+                    messages: messages.items.reverse(),
+                    next: messages.next
                 });
             }).catch(() => {
                 dispatch({type: "GET_MESSAGES_FAIL"});
             });
+    };
+}
+
+export function getNextMessages() {
+    return async function (dispatch, getState) {
+        dispatch({type: "GET_NEXT_MESSAGES"});
+        let messages,
+            scrollTo = window.pageYOffset || document.getElementById("messages-layout__messages").scrollHeight * -1;
+        try {
+            messages = await api.getMessages(getState().chat.messagesNext);
+            dispatch({
+                type: "GET_NEXT_MESSAGES_SUCCESS",
+                messages: messages.items,
+                next: messages.next
+            });
+
+            let newSize = window.pageYOffset || document.getElementById("messages-layout__messages").scrollHeight;
+            dispatch({
+                type: "SET_NEW_SCROLL_POSITION",
+                scrollPosition: scrollTo + newSize
+            });
+        } catch (e) {
+            dispatch({type: "GET_NEXT_MESSAGES_FAIL"});
+        }
     };
 }
 
@@ -108,7 +128,7 @@ export function getContacts(currentUser) {
         api.getUsers().then((users) => {
             let contacts = [];
             users.items.forEach((user) => {
-                if(user.name!==currentUser.name){
+                if (!currentUser || user.name !== currentUser.name) {
                     contacts.push(user);
                 }
             });
@@ -119,6 +139,27 @@ export function getContacts(currentUser) {
         }).catch(() => {
             dispatch({type: "GET_CONTACTS_FAIL"});
         });
+    };
+}
+
+export function getUsersAvatars(roomId) {
+    return (dispatch) => {
+        dispatch({type: "GET_USERS_AVATARS"});
+        api.getRoom(roomId)
+            .then((room) => {
+                room.users && room.users.map((room) => (
+                    api.getUser(room).then((user) => {
+                        dispatch({
+                            type: "GET_USERS_AVATARS_SUCCESS",
+                            usersAvatars: [user._id, user.photo]
+                        });
+                    }).catch(() => {
+                        dispatch({type: "GET_USERS_AVATARS_FAIL"});
+                    })
+                ));
+            }).catch(() => {
+                dispatch({type: "GET_ROOM_USERS_FAIL"});
+            });
     };
 }
 
@@ -205,11 +246,13 @@ export function pickUser(usersArr, userId) {
 }
 
 function setLastMessageToRoom(room) {
-    console.log("123");
     return new Promise(function (resolve) {
         api.getRoomMessages(room._id).then((messages) => {
             room.lastMessage = messages.items[0];
-            resolve(room);
+            api.getUser(room.users[0]).then((user) => {
+                if (user) room.roomAvatar = user.photo;
+                resolve(room);
+            });
         });
     });
 }

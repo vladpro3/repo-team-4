@@ -16,14 +16,14 @@
     word-wrap: break-word;
 }
 
-.styleballoon {
+.style-balloon {
     background: #fff;
 }
 
-.styleballoon .balloon__content {
+.style-balloon .balloon__content {
     color: #46454C;
 }
 
-.styleballoon .data-message {
+.style-balloon .data-message {
     color: #f25a41;
 }
