@@ -6,8 +6,8 @@ const {
     MONGO_DATABSE = "repoteam4",
     MONGO_HOST = "ds157538.mlab.com",
     MONGO_PORT = 57538,
-    // SERVER_HOST = "localhost",
-    // SERVER_PORT = 3001
+    SERVER_HOST = "localhost",
+    SERVER_PORT = 3001
 } = process.env;
 
 /**
@@ -28,8 +28,10 @@ const DATABASE_CONFIG = {
 const SERVER_CONFIG = {
     // host: "localhost",
     // port: 3001
-    host: process.env.HOST || process.env.SERVER_HOST || "localhost",
-    port: process.env.PORT || 8080,
+    // host: process.env.HOST || process.env.SERVER_HOST || "localhost",
+    // port: process.env.PORT || 8080,
+    host: SERVER_HOST,
+    port: SERVER_PORT,
 };
 
 createServer(SERVER_CONFIG, DATABASE_CONFIG)
