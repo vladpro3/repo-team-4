@@ -4,6 +4,7 @@ const {
     MONGO_USER = "repoteam4",
     MONGO_PASSWORD = "repoteam4",
     MONGO_DATABSE = "repoteam4",
+    MONGO_LOCAL = 'false',
     MONGO_HOST = "ds157538.mlab.com",
     MONGO_PORT = 57538,
     SERVER_HOST = "localhost",
@@ -18,7 +19,7 @@ const DATABASE_CONFIG = {
     password: MONGO_PASSWORD,
     host: MONGO_HOST,
     port: MONGO_PORT,
-    local: "false",
+    local: MONGO_LOCAL !== 'false',
     database: MONGO_DATABSE
 };
 
