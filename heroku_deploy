@@ -1,4 +1,4 @@
 #!/bin/bash
-docker login -u=_ -p=$DOCKER_PASSWORD registry.heroku.com
+#docker login -u=_ -p=$DOCKER_PASSWORD registry.heroku.com
 docker tag vladpro3-repoteam4 registry.heroku.com/vladpro3-repoteam4/web
 docker push registry.heroku.com/vladpro3-repoteam4/web
