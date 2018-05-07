@@ -20,7 +20,7 @@ class Profile extends Component {
                     <ProfileHeader/>
                     <div className='Profile__main'>
                         <div className='Profile__avatar'>
-                            <Avatar/>
+                            <Avatar url={this.props.currentUser && this.props.currentUser.photo}/>
                         </div>
                         <div className='Profile__info-container'>
                             <h2>{this.props.currentUser && this.props.currentUser.name}</h2>
@@ -36,6 +36,7 @@ class Profile extends Component {
 
 Profile.propTypes = {
     name: PropTypes.string,
+    photo: PropTypes.string,
     getCurrentUserInfo: PropTypes.func,
     currentUser: PropTypes.object
 };
