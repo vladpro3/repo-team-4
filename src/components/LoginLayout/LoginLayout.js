@@ -4,19 +4,14 @@ import {connect} from "react-redux";
 
 import "./LoginLayout.css";
 import {changeLayout} from "../../reducers/navigation/action";
-import {authorization} from "../../reducers/authorization/action";
 import {loginButtonHandler} from "../../reducers/authorization/action";
 
-import api from "../../api";
+// import api from "../../api";
 
 class LoginLayout extends React.Component {
     state = {
         loading: true
     };
-
-    componentWillMount() {
-        this.props.authorization();
-    }
 
     onLoginClick = () => {
         // const newUser = {
@@ -28,7 +23,7 @@ class LoginLayout extends React.Component {
         // };
         // const u = api.saveUser(newUser);
         // console.log('----', u);
-        api.getUsers({limit: 20}).then((user) => console.log(user));
+        // api.getUsers({limit: 20}).then((user) => console.log(user));
         this.props.loginButtonHandler(document.getElementById("login").value);
     };
 
@@ -51,8 +46,7 @@ class LoginLayout extends React.Component {
 
 LoginLayout.propTypes = {
     changeLayout: PropTypes.func,
-    authorization: PropTypes.func,
-    loginButtonHandler: PropTypes.func,
+    loginButtonHandler: PropTypes.func
 };
 
 export default connect(
@@ -60,7 +54,6 @@ export default connect(
         layout: state.navigation.layout
     }), {
         changeLayout,
-        authorization,
         loginButtonHandler
     }
 )(LoginLayout);

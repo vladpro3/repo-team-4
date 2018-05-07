@@ -1,5 +1,6 @@
 const initialState = {
-    user: []
+    user: [],
+    isAuth: false
 };
 
 export default function reducer(state = initialState, action) {
@@ -11,6 +12,14 @@ export default function reducer(state = initialState, action) {
         }
         break;
     }
+
+    case "AUTH_CHECKED": {
+        return {
+            ...state,
+            isAuth: true
+        };
+    }
+
     default: {
         return state;
     }

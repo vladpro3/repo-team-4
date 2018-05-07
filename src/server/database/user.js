@@ -67,7 +67,6 @@ async function getUserByName(db, name, sid) {
     let user = await db.collection(TABLE).findOne({name: name});
     let saveses = await saveSessionInfo(db, {sid: sid, userId: user._id});
     let session = await getSessionInfo(db, saveses._id);
-    console.log(user, saveses, session);
     return {sid: session.sid, ...user};
 }
 module.exports = {

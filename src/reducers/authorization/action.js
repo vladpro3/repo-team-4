@@ -3,26 +3,24 @@ import api from "../../api";
 export function authorization() {
     return (dispatch) => {
         api.checkAuth().then((user) => {
-            console.log(user);
             if (user !== null) {
                 dispatch({
                     type: "CHANGE_LAYOUT",
                     layout: "chatListLayout"
                 });
             }
+            dispatch({
+                type: "AUTH_CHECKED"
+            });
         });
     };
 }
 
 export function loginButtonHandler(name) {
-    return (dispatch) => {
+    return () => {
         api.getUserByName(name).then((user) => {
-            console.log(user);
             if (user !== null) {
-                dispatch({
-                    type: "CHANGE_LAYOUT",
-                    layout: "chatListLayout"
-                });
+                document.location.reload();
             } else {
                 console.log("Пользователя нет в принципе");
             }

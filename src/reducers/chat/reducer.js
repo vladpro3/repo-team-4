@@ -38,7 +38,8 @@ export default function reducer(state = initialState, action) {
     case "GET_ROOMS_FAIL": {
         console.log("Ошибка загрузки чатов");
         return {
-            ...state
+            ...state,
+            loading: false
         };
     }
 
