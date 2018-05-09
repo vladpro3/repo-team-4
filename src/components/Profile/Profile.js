@@ -4,15 +4,11 @@ import PropTypes from "prop-types";
 
 import "./Profile.css";
 import ProfileHeader from "./ProfileHeader";
-import {Avatar} from "../Avatar/Avatar";
+import Avatar from "../Avatar/Avatar";
 import {changeLayout} from "../../reducers/navigation/action";
 import {getCurrentUserInfo} from "../../reducers/currentUser/action";
 
 class Profile extends Component {
-    componentWillMount() {
-        this.props.getCurrentUserInfo();
-    }
-
     render() {
         return (
             <div className='Profile__wrapper'>
@@ -20,12 +16,12 @@ class Profile extends Component {
                     <ProfileHeader/>
                     <div className='Profile__main'>
                         <div className='Profile__avatar'>
-                            <Avatar url={this.props.currentUser && this.props.currentUser.photo}/>
+                            <Avatar url={this.props.user && this.props.user.photo}/>
                         </div>
                         <div className='Profile__info-container'>
-                            <h2>{this.props.currentUser && this.props.currentUser.name}</h2>
-                            <span>{this.props.currentUser && this.props.currentUser.email}</span>
-                            <span>{this.props.currentUser && this.props.currentUser.phone}</span>
+                            <h2>{this.props.user && this.props.user.name}</h2>
+                            <span>{this.props.user && this.props.user.email}</span>
+                            <span>{this.props.user && this.props.user.phone}</span>
                         </div>
                     </div>
                 </div>
@@ -38,12 +34,13 @@ Profile.propTypes = {
     name: PropTypes.string,
     photo: PropTypes.string,
     getCurrentUserInfo: PropTypes.func,
-    currentUser: PropTypes.object
+    getUserInfo: PropTypes.func,
+    user: PropTypes.object
 };
 
 export default connect(
     state => ({
-        currentUser: state.currentUser.currentUser
+        user: state.currentUser.user
     }), {
         changeLayout,
         getCurrentUserInfo

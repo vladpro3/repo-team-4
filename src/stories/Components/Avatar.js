@@ -1,6 +1,6 @@
 import React from "react";
 import {storiesOf} from "@storybook/react";
-import {Avatar} from "../../../src/components/Avatar/Avatar";
+import Avatar from "../../../src/components/Avatar/Avatar";
 
 export default storiesOf("Avatar", module)
     .add("Standart Avatar", () => ([

@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 
 import "./ContactItemMin.css";
-import {Avatar} from "../Avatar/Avatar";
+import Avatar from "../Avatar/Avatar";
 import {joinChat, pickUser} from "../../reducers/chat/action";
 
 class contactItemMin extends PureComponent {

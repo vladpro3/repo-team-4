@@ -11,3 +11,20 @@ export function getCurrentUserInfo() {
             });
     };
 }
+
+export function openUserProfile(userId) {
+    return (dispatch) => {
+        api.getUser(userId)
+            .then((user) => {
+                dispatch({
+                    type: "GET_USER",
+                    user: user
+                });
+                dispatch({
+                    type: "CHANGE_LAYOUT",
+                    layout: "profile"
+                });
+            });
+
+    };
+}

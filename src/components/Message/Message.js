@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {Avatar} from "../Avatar/Avatar";
+import Avatar from "../Avatar/Avatar";
 import {Balloon} from "../Balloon/Balloon";
 import "./Message.css";
 
@@ -14,8 +14,8 @@ class Message extends Component {
         return (
             <div className={this.props.isMyMessage ?
                 "outgoing-message  messages-layout__message" : "incoming-message messages-layout__message"}>
-                {!avatars && <Avatar size='small'/>}
-                {avatars && <Avatar size='small' url={avatars}/>}
+                {!avatars && <Avatar size='small' userId={this.props.userId}/>}
+                {avatars && <Avatar size='small' url={avatars} userId={this.props.userId}/>}
                 <Balloon message={this.props.message.message} typeMessage={!this.props.isMyMessage}
                     dateMessage={this.props.message.created_at}/>
             </div>

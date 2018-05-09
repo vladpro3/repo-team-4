@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 
 import avatar_img from "./default-avatar.png";
 import "./Avatar.css";
+import {connect} from "react-redux";
+import {openUserProfile} from "../../reducers/currentUser/action";
 
 
 export class Avatar extends Component {
@@ -21,9 +23,14 @@ export class Avatar extends Component {
         else this.image = avatar_img;
     }
 
+    onAvatarClickHandler = () => {
+        if (this.props.userId)
+            this.props.openUserProfile(this.props.userId);
+    };
+
     render() {
         return (
-            <div className={this.classAvatarSize}>
+            <div className={this.classAvatarSize} onClick={() => this.onAvatarClickHandler()}>
                 <img src={this.image} className='avatar__img' alt="avatar"/>
             </div>
         );
@@ -31,6 +38,13 @@ export class Avatar extends Component {
 }
 
 Avatar.propTypes = {
+    userId: PropTypes.string,
     size: PropTypes.string,
-    url: PropTypes.string
+    url: PropTypes.string,
+    openUserProfile: PropTypes.func
 };
+
+export default connect(
+    state => ({ }), {
+        openUserProfile
+    })(Avatar);

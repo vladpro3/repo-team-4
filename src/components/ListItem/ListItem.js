@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 import "./ListItem.css";
-import {Avatar} from "../Avatar/Avatar";
+import Avatar from "../Avatar/Avatar";
 import {joinExistingChat} from "../../reducers/chat/action";
 
 class ListItem extends Component {

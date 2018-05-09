@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 import "./ContactItem.css";
-import {Avatar} from "../Avatar/Avatar";
+import Avatar from "../Avatar/Avatar";
 import {joinChat} from "../../reducers/chat/action";
 import {getCurrentUserInfo} from "../../reducers/currentUser/action";
 

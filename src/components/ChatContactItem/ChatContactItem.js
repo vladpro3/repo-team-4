@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 
-import {Avatar} from "../Avatar/Avatar";
+import Avatar from "../Avatar/Avatar";
 import "../ContactItemMin/ContactItemMin.css";
 
 class ChatContactItem extends PureComponent {

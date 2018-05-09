@@ -1,5 +1,6 @@
 const initialState = {
-    currentUser: null
+    currentUser: null,
+    user: null
 };
 
 export default function reducer(state = initialState, action) {
@@ -8,6 +9,12 @@ export default function reducer(state = initialState, action) {
         return {
             ...state,
             currentUser: action.currentUser,
+        };
+    }
+    case "GET_USER": {
+        return {
+            ...state,
+            user: action.user,
         };
     }
     default: {
