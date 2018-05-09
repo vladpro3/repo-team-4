@@ -77,6 +77,11 @@ class Api {
     async checkAuth() {
         return this._requestResponse(MESSAGES.CHECK_AUTH);
     }
+
+    async addUser(user) {
+        return this._requestResponse(MESSAGES.ADD_USER, user);
+    }
+
     /**
      * Get information about user
      *

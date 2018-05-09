@@ -17,7 +17,7 @@ class Header extends React.Component {
     };
 
     render() {
-        let headerClass = "header";
+        let headerClass = "header-default";
         let chatName = this.props.chatName;
         if (this.props.chatName && this.props.chatName.split(", ").length > 1) {
             this.props.chatName.split(", ").forEach((name) => {
@@ -33,7 +33,7 @@ class Header extends React.Component {
                 </div>
                 <ChatTitle chatName={chatName}/>
                 <div className="button button-2" onClick={() => this.clickRightButtonHandler()}>
-                    <i className="fa fa-ellipsis-h"/>
+                    <i className="fa fa-cog"/>
                 </div>
             </div>
         );

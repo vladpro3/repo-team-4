@@ -10,7 +10,6 @@ import {Spinner} from "../Loaders/Spinner/Spinner";
 class ChatList extends React.Component {
     componentDidMount() {
         this.props.getRooms();
-
     }
 
     render() {

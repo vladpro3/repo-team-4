@@ -1,7 +1,7 @@
 const {ObjectId} = require("mongodb");
 
 const {getSessionInfo, saveSessionInfo} = require("./session");
-const {pageableCollection} = require("./helpers"); //insertOrUpdateEntity для создания пользователя
+const {pageableCollection, insertOrUpdateEntity} = require("./helpers"); //insertOrUpdateEntity для создания пользователя
 
 const TABLE = "users";
 
@@ -23,7 +23,7 @@ const TABLE = "users";
  */
 async function findUserBySid(db, sid) {
     let session = await getSessionInfo(db, sid);
-    console.log("session from user.js", session);
+
     if(session.userId) {
         return db.collection(TABLE).findOne({_id: session.userId});
     }
@@ -49,9 +49,18 @@ async function getUserBySid(db, sid) {
  *
  * @returns {Promise<User>}
  */
-// async function saveUser(db, user) {
-//     return insertOrUpdateEntity(db.collection(TABLE), user);
-// }
+async function saveUser(db, user) {
+    return insertOrUpdateEntity(db.collection(TABLE), user);
+}
+
+async function saveNewUser(db, user, sid) {
+    const session = await getSessionInfo(db, sid);
+    let newUser = await saveUser(db, user);
+    session.userId = newUser._id;
+    await saveSessionInfo(db, session);
+
+    return newUser;
+}
 
 /**
  * @param {Db} db
@@ -71,6 +80,7 @@ async function getUserByName(db, name, sid) {
 }
 module.exports = {
     findUserBySid,
+    saveNewUser,
     getUsers,
     getUser,
     getUserByName,

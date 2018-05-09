@@ -12,20 +12,19 @@
     display: flex;
     flex-direction: column;
     width: 80%;
-    margin: auto auto 2em;
+    margin: auto auto 1em;
 }
 
 .container span{
     padding: 0.5em 0.5em 0.5em 0;
     color: #6f6c6a;
-
 }
 
 .container input{
-    border: 0;
+    border: 1px solid #f25a41;
     padding: 1em;
-    background-color: #f25a41;
-    color: #fff;
+    color: #f25a41;
+    outline: #f25a41 3px;
 }
 
 .buttonContainer{

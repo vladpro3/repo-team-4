@@ -6,7 +6,7 @@ export class MessageInput extends Component {
         return (
             <div className="sendmessage__message-wrapper">
                 <div className="sendmessage__input">
-                    <input className="sendmessage__textarea" placeholder="Write message"/>
+                    <input className="sendmessage__textarea" placeholder="Напишите сообщение"/>
                 </div>
             </div>
         );

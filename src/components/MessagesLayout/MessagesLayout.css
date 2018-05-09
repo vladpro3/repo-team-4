@@ -1,6 +1,6 @@
 .messages-layout{
-    margin-top: 80px;
-    margin-bottom: 85px;
+    margin-top: 68px;
+    margin-bottom: 68px;
 }
 
 .messages-layout__header{
@@ -12,7 +12,7 @@
 
 .messages-layout__messages{
     overflow-y: scroll;
-    height: calc(100vh - 165px);
+    height: calc(100vh - 136px);
 }
 
 .messages-layout__message:first-child{
@@ -21,7 +21,7 @@
 
 .messages-layout__send-message{
     background: white;
-    min-height: 75px;
+    min-height: 68px;
     width: 100%;
     position: fixed;
     bottom: 0;

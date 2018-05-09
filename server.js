@@ -1,12 +1,12 @@
 const {createServer} = require("./src/server/server");
 
 const {
-    MONGO_USER = "repoteam4",
-    MONGO_PASSWORD = "repoteam4",
-    MONGO_DATABSE = "repoteam4",
+    MONGO_USER = "vladpro3-repoteam4",
+    MONGO_PASSWORD = "vladpro3-repoteam4",
+    MONGO_DATABSE = "db-1",
     MONGO_LOCAL = "false",
-    MONGO_HOST = "ds157538.mlab.com",
-    MONGO_PORT = 57538
+    MONGO_HOST = "ds161346.mlab.com",
+    MONGO_PORT = 61346
 } = process.env;
 
 /**

@@ -1,5 +1,6 @@
 .contactsList{
-    height: 78vh;
+    margin-top: 5px;
+    height: calc(78vh - 10px);
     overflow-y: scroll;
     -webkit-animation: appearance 0.5s;
     -o-animation: appearance 0.5s;

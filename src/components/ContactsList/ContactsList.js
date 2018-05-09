@@ -25,6 +25,7 @@ class ContactsList extends React.Component {
                         sizeAvatar={"small"}
                         key={user._id}
                         name={user.name}
+                        urlAvatar={user.photo}
                         lastMessage={user.phone}
                         userId={user._id}/>;
                 })}

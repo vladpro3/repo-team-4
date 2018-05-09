@@ -2,7 +2,6 @@ import api from "../../api";
 
 export function joinChat(userId, currentUser) {
     return (dispatch) => {
-        // api.getUsers({limit:20}).then((user)=>console.log(user));
         api.getUser(userId)
             .then((user) => {
 
@@ -67,7 +66,7 @@ export function joinExistingChat(roomId) {
 export function getRooms() {
     return (dispatch) => {
         dispatch({type: "GET_ROOMS"});
-        api.getCurrentUserRooms()
+        api.getCurrentUserRooms({limit: 99})
             .then((rooms) => {
                 Promise.all(rooms.items.map(setLastMessageToRoom)).then(() => {
                     rooms.items.sort(compareRooms);

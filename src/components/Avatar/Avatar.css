@@ -14,17 +14,15 @@
     height: 119px;
 }
 
-.avatar__img__small,
-.avatar__img__medium,
-.avatar__img__large{
-    background: white;
-    overflow: hidden;
-}
-
 .avatar__img{
     height: 100%;
     width: 100%;
     object-fit: cover;
     border-radius: 50%;
     image-rendering: optimizeSpeed;
+
+}
+
+.avatar__img__large .avatar__img{
+    border: 3px solid #f25a41;
 }

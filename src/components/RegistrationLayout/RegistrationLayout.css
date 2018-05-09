@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-.login-page{
+.registration-page{
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -10,41 +10,46 @@
     align-content: space-around;
 }
 
-.login-container{
+.registration-container{
     width: 250px;
-    height: 240px;
+    height: 440px;
     background-color: #efeee3;
     filter: drop-shadow( 0 3px 5px rgba(0,0,0,0.25));
     padding: 1em 2em 2em;
 }
 
-.login-container h2{
+.registration-container h2{
     text-align: center;
 }
 
-.login-container__input-container{
+.registration-container__input-container{
     display: flex;
     flex-direction: column;
 }
 
-.login-container__input-container span{
-    padding: 0.5em 0.5em 0.5em 0;
+.registration-container__input-container div{
+    padding: 0.6em 0 0.2em 0;
     color: #6f6c6a;
 }
 
-.login-container__input-container input{
+.registration-container__input-container .span_required{
+    padding-left: 0.2em;
+    color: red;
+}
+
+.registration-container__input-container input{
     border: 0;
     padding: 1em;
 }
 
-.login-container__button-container{
+.registration-container__button-container{
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-.login-container__button-container__login{
-    margin: 1em auto auto;
+.registration-container__button-container div{
+    margin: 2em auto auto;
     width: 70%;
     background-color: #f25a41;
     color: #fff;
@@ -55,16 +60,7 @@
     padding: 0.7em;
 }
 
-.login-container__button-container__registration{
+.registration-container_error{
     text-align: center;
-    margin-top: 25px;
-    color: #0366d6;
-}
-
-.login-container__button-container__registration:hover,
-.login-container__button-container__registration:active,
-.login-container__button-container__registration:focus{
-    outline: none;
-    cursor: pointer;
-    text-decoration: underline;
+    color: red;
 }

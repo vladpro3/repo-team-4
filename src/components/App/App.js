@@ -12,6 +12,7 @@ import Profile from "../Profile/Profile";
 import CreateRoomLayout from "../CreateRoomLayout/CreateRoomLayout";
 import ChatSettingsLayout from "../ChatSettingsLayout/ChatSettingsLayout";
 import {authorization} from "../../reducers/authorization/action";
+import RegistrationLayout from "../RegistrationLayout/RegistrationLayout";
 
 class App extends Component {
     componentWillMount() {
@@ -24,6 +25,9 @@ class App extends Component {
         switch (this.props.layout) {
         case "authorization":
             layout = <LoginLayout/>;
+            break;
+        case "registration":
+            layout = <RegistrationLayout/>;
             break;
         case "chatListLayout":
             layout = <ChatListLayout/>;

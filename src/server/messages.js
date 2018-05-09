@@ -14,6 +14,7 @@ module.exports = {
      */
     CHECK_AUTH: "CHECK_AUTH",
     USER_BY_NAME: "USER_BY_NAME",
+    ADD_USER: "ADD_USER",
     /**
      * Change online status of user
      */

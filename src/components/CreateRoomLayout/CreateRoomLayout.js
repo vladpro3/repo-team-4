@@ -19,6 +19,7 @@ class CreateRoomLayout extends React.Component {
 
     render() {
         let users = this.props.users;
+        let currentUser = this.props.currentUser;
 
         return (
             <div>
@@ -33,12 +34,15 @@ class CreateRoomLayout extends React.Component {
                     <span>Пригласить:</span>
                     <div className='contactList'>
                         {users && users.map(function (user) {
-                            return <ContactItemMin
-                                sizeAvatar={"small"}
-                                key={user._id}
-                                name={user.name}
-                                userId={user._id}
-                            />;
+                            if (currentUser._id !== user._id)
+                                return <ContactItemMin
+                                    sizeAvatar={"small"}
+                                    key={user._id}
+                                    urlAvatar={user.photo}
+                                    name={user.name}
+                                    userId={user._id}
+                                />;
+                            return null;
                         })}
                     </div>
                 </div>
@@ -55,13 +59,15 @@ CreateRoomLayout.propTypes = {
     getContacts: PropTypes.func,
     createRoom: PropTypes.func,
     pickedUsers: PropTypes.array,
-    users: PropTypes.array
+    users: PropTypes.array,
+    currentUser: PropTypes.object
 };
 
 export default connect(
     state => ({
         users: state.chat.users,
-        pickedUsers: state.chat.pickedUsers
+        pickedUsers: state.chat.pickedUsers,
+        currentUser: state.currentUser.currentUser
     }), {
         changeLayout,
         getContacts,

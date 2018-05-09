@@ -7,6 +7,7 @@ import {getRoomUsers, getContacts, addUsers, leaveRoom} from "../../reducers/cha
 import ChatSettingsHeader from "../ChatSettingsHeader/ChatSettingsHeader";
 import ChatContactItem from "../ChatContactItem/ChatContactItem";
 import ContactItemMin from "../ContactItemMin/ContactItemMin";
+import {InlineLoader} from "../Loaders/InlineLoader/InlineLoader";
 
 class ChatSettingsLayout extends React.Component {
     state = {
@@ -46,6 +47,7 @@ class ChatSettingsLayout extends React.Component {
         const usersInRoom = this.props.roomUsers;
         const users = this.props.users;
         const roomUsersId = this.state.roomUsersId;
+        let isLoading = this.props.loading;
 
         return (
             <div>
@@ -54,10 +56,12 @@ class ChatSettingsLayout extends React.Component {
                     <div className='container'>
                         <span>Участники чата:</span>
                         <div className='contactList'>
-                            {usersInRoom && usersInRoom.map((user) => (
+                            {isLoading && <InlineLoader/>}
+                            {usersInRoom[0] && usersInRoom.map((user) => (
                                 <ChatContactItem
                                     sizeAvatar={"small"}
                                     key={user._id}
+                                    urlAvatar={user.photo}
                                     name={user.name}
                                     userId={user._id}
                                 />
@@ -78,6 +82,7 @@ class ChatSettingsLayout extends React.Component {
                                     return <ContactItemMin
                                         sizeAvatar={"small"}
                                         key={user._id}
+                                        urlAvatar={user.photo}
                                         name={user.name}
                                         userId={user._id}
                                     />;
@@ -105,7 +110,8 @@ ChatSettingsLayout.propTypes = {
     users: PropTypes.array,
     roomId: PropTypes.string,
     roomUsers: PropTypes.array,
-    leaveRoom: PropTypes.func
+    leaveRoom: PropTypes.func,
+    loading: PropTypes.bool
 };
 
 export default connect(
@@ -113,6 +119,7 @@ export default connect(
         roomId: state.chat.currentChatId,
         roomUsers: state.chat.roomUsers,
         users: state.chat.users,
+        loading: state.chat.loading,
         pickedUsers: state.chat.pickedUsers
     }), {
         changeLayout,

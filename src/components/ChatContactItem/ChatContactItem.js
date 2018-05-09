@@ -15,9 +15,6 @@ class ChatContactItem extends PureComponent {
                         <span className="contact-item-min__left-info__user-info__name">
                             {this.props.name}
                         </span>
-                        <span className="contact-item-min__left-info__user-info__last-message">
-                            {this.props.lastMessage}
-                        </span>
                     </div>
                 </div>
             </div>

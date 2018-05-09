@@ -4,9 +4,7 @@ import {connect} from "react-redux";
 
 import "./LoginLayout.css";
 import {changeLayout} from "../../reducers/navigation/action";
-import {loginButtonHandler} from "../../reducers/authorization/action";
-
-// import api from "../../api";
+import {loginButtonHandler, registrationButtonHandler} from "../../reducers/authorization/action";
 
 class LoginLayout extends React.Component {
     state = {
@@ -14,29 +12,27 @@ class LoginLayout extends React.Component {
     };
 
     onLoginClick = () => {
-        // const newUser = {
-        //     email : "Bondarovich77@gmail.com",
-        //     name : "Бондарович Влад",
-        //     password : "228",
-        //     phone : "(111)272-34-44",
-        //     photo : "https://image.ibb.co/nA0sES/photo_2018_05_05_16_35_30.jpg"
-        // };
-        // const u = api.saveUser(newUser);
-        // console.log('----', u);
-        // api.getUsers({limit: 20}).then((user) => console.log(user));
         this.props.loginButtonHandler(document.getElementById("login").value);
+    };
+
+    onRegistrationClick = () => {
+        this.props.registrationButtonHandler();
     };
 
     render() {
         return (
-            <div className='loginPage'>
-                <div className='loginContainer'>
-                    <div className='inputContainer'>
-                        <span>Логин:</span>
-                        <input id='login' type='text'/>
+            <div className='login-page'>
+                <div className='login-container'>
+                    <h2>Авторизация</h2>
+                    <div className='login-container__input-container'>
+                        <span>Введите Ваш никнейм:</span>
+                        <input tabIndex="1" id='login' type='text' autoFocus/>
                     </div>
-                    <div className='buttonContainer'>
-                        <div className='button' onClick={() => this.onLoginClick()}>Войти</div>
+                    <div className='login-container__button-container'>
+                        <div tabIndex="1" className='login-container__button-container__login'
+                            onClick={() => this.onLoginClick()}>Войти</div>
+                        <span tabIndex="1" className='login-container__button-container__registration'
+                            onClick={() => this.onRegistrationClick()}>Нажмите сюда для регистрации</span>
                     </div>
                 </div>
             </div>
@@ -46,7 +42,8 @@ class LoginLayout extends React.Component {
 
 LoginLayout.propTypes = {
     changeLayout: PropTypes.func,
-    loginButtonHandler: PropTypes.func
+    loginButtonHandler: PropTypes.func,
+    registrationButtonHandler: PropTypes.func
 };
 
 export default connect(
@@ -54,6 +51,7 @@ export default connect(
         layout: state.navigation.layout
     }), {
         changeLayout,
-        loginButtonHandler
+        loginButtonHandler,
+        registrationButtonHandler
     }
 )(LoginLayout);

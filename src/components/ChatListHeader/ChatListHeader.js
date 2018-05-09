@@ -11,7 +11,7 @@ class ChatListHeader extends React.Component {
         return (
             <div className="chat-list-header">
                 <div className="chat-list-header__button" onClick={() => this.props.changeLayout("profile")}>
-                    <i className='fa fa-cog'/>
+                    <i className='fa fa-user'/>
                 </div>
                 <h2>Диалоги</h2>
                 <div className="chat-list-header__button" onClick={() => this.props.changeLayout("createRoom")}>

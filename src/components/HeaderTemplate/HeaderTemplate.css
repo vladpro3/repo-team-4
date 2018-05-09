@@ -4,15 +4,9 @@
     flex-direction: row;
     justify-content: space-between;
     text-align: center;
-    padding: 1em 2em;
+    padding: 0 2em;
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.09);
-
-    height: 3em;
     align-items: center;
-}
-
-.header-template h2 {
-    margin-top: 0;
 }
 
 .header-template__button {
