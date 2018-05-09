@@ -45,6 +45,6 @@ Avatar.propTypes = {
 };
 
 export default connect(
-    state => ({ }), {
+    () => ({}), {
         openUserProfile
     })(Avatar);
