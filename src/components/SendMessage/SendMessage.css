@@ -9,6 +9,7 @@
     justify-content: space-around;
     font-family: Roboto;
     position: fixed;
+    bottom: 0;
 }
 
 .attachement__icon>i,
