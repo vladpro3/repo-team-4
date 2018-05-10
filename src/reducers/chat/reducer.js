@@ -11,8 +11,7 @@ const initialState = {
     newMessage: null,
     pickedUsers: [],
     messagesNext: null,
-    scrollPosition: 0,
-    counter: 1
+    scrollPosition: 0
 };
 
 export default function reducer(state = initialState, action) {

@@ -1,6 +1,6 @@
 .chatList{
-    height: 78vh;
-    margin-top: 5em;
+    height: calc(100vh - 130px);
+    margin-top: 68px;
     overflow-y: scroll;
     -webkit-animation: appearance 0.5s;
     -o-animation: appearance 0.5s;
