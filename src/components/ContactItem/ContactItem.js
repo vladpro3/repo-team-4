@@ -10,7 +10,6 @@ import {getCurrentUserInfo} from "../../reducers/currentUser/action";
 class ContactItem extends PureComponent {
     componentWillMount() {
         this.props.getCurrentUserInfo();
-
     }
 
     clickHandler = () => {

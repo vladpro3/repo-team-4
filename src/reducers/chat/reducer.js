@@ -11,7 +11,8 @@ const initialState = {
     newMessage: null,
     pickedUsers: [],
     messagesNext: null,
-    scrollPosition: 0
+    scrollPosition: 0,
+    counter: 1
 };
 
 export default function reducer(state = initialState, action) {
@@ -162,10 +163,16 @@ export default function reducer(state = initialState, action) {
     }
 
     case "ON_NEW_MESSAGE": {
+        if (action.newMessage[0].roomId === state.currentChatId &&
+            state.currentChatId === action.fromRoomId) {
+            return {
+                ...state,
+                messages: state.messages.concat(action.newMessage),
+                scrollPosition: -1
+            };
+        }
         return {
-            ...state,
-            messages: state.messages.concat(action.newMessage),
-            scrollPosition: -1
+            ...state
         };
     }
     case "PICK_USER": {

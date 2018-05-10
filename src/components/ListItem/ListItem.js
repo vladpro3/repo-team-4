@@ -73,6 +73,7 @@ class ListItem extends Component {
 ListItem.propTypes = {
     joinExistingChat: PropTypes.func,
     roomId: PropTypes.string,
+    rooms: PropTypes.array,
     lastMessage: PropTypes.string,
     date: PropTypes.number,
     sizeAvatar: PropTypes.string,
@@ -85,7 +86,9 @@ ListItem.propTypes = {
 
 export default connect(
     (state) => ({
-        currentUser: state.currentUser.currentUser
+        currentUser: state.currentUser.currentUser,
+        rooms: state.chat.rooms,
+        counter: state.chat.counter
     }), {
         joinExistingChat
     }

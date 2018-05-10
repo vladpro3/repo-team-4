@@ -4,7 +4,6 @@ export function joinChat(userId, currentUser) {
     return (dispatch) => {
         api.getUser(userId)
             .then((user) => {
-
                 let names = [user.name, currentUser.name];
                 names.sort();
                 names = names[0]+", "+names[1];
@@ -16,7 +15,8 @@ export function joinChat(userId, currentUser) {
                         api.onMessage((mess) => {
                             dispatch({
                                 type: "NEW_MESSAGE",
-                                newMessage: mess
+                                newMessage: mess,
+                                fromRoomId: room._id
                             });
                         });
                     });
@@ -39,21 +39,10 @@ export function joinExistingChat(roomId) {
     return (dispatch) => {
         api.getRoom(roomId)
             .then((room) => {
-                api.currentUserJoinRoom(room._id)
-                    .then(() => {
-                        api.onMessage((mess) => {
-                            dispatch({
-                                type: "ON_NEW_MESSAGE",
-                                newMessage: [mess]
-                            });
-                        });
-                    });
-
                 dispatch({
                     type: "JOIN_CHAT",
                     id: room._id
                 });
-
                 dispatch({
                     type: "CHANGE_LAYOUT",
                     layout: "messagesLayout"
@@ -66,7 +55,7 @@ export function joinExistingChat(roomId) {
 export function getRooms() {
     return (dispatch) => {
         dispatch({type: "GET_ROOMS"});
-        api.getCurrentUserRooms({limit: 99})
+        api.getCurrentUserRooms({limit: 0})
             .then((rooms) => {
                 Promise.all(rooms.items.map(setLastMessageToRoom)).then(() => {
                     rooms.items.sort(compareRooms);
@@ -124,7 +113,7 @@ export function getNextMessages() {
 export function getContacts(currentUser) {
     return (dispatch) => {
         dispatch({type: "GET_CONTACTS"});
-        api.getUsers().then((users) => {
+        api.getUsers({limit: 0}).then((users) => {
             let contacts = [];
             users.items.forEach((user) => {
                 if (!currentUser || user.name !== currentUser.name) {
@@ -188,7 +177,8 @@ export function sendMessage(roomId, message) {
         api.sendMessage(roomId, message).then((message) => {
             dispatch({
                 type: "ON_NEW_MESSAGE",
-                newMessage: [message]
+                newMessage: [message],
+                fromRoomId: roomId
             });
         });
     };
@@ -203,7 +193,8 @@ export function createRoom(roomName, usersIds) {
                         api.onMessage((mess) => {
                             dispatch({
                                 type: "NEW_MESSAGE",
-                                newMessage: mess
+                                newMessage: mess,
+                                fromRoomId: room._id
                             });
                         });
                     });

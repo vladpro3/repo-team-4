@@ -4,6 +4,21 @@ export function authorization() {
     return (dispatch) => {
         api.checkAuth().then((user) => {
             if (user !== null) {
+                api.getCurrentUserRooms({limit: 0})
+                    .then((rooms) => {
+                        rooms.items.map((room) => {
+                            return api.currentUserJoinRoom(room._id)
+                                .then(() => {
+                                    api.onMessage((mess) => {
+                                        dispatch({
+                                            type: "ON_NEW_MESSAGE",
+                                            newMessage: [mess],
+                                            fromRoomId: room._id
+                                        });
+                                    });
+                                });
+                        });
+                    });
                 dispatch({
                     type: "CHANGE_LAYOUT",
                     layout: "chatListLayout"
