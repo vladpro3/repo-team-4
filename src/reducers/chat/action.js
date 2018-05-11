@@ -55,7 +55,7 @@ export function joinExistingChat(roomId) {
 export function getRooms() {
     return (dispatch) => {
         dispatch({type: "GET_ROOMS"});
-        api.getCurrentUserRooms({limit: 0})
+        api.getCurrentUserRooms({limit: 999})
             .then((rooms) => {
                 Promise.all(rooms.items.map(setLastMessageToRoom)).then(() => {
                     rooms.items.sort(compareRooms);

@@ -19,7 +19,7 @@ class ContactsList extends React.Component {
 
         let users = this.props.users;
         return (
-            <div className='contactsList'>
+            <div className='contacts-list'>
                 {users && users.map(function (user) {
                     return <ContactItem
                         sizeAvatar={"small"}

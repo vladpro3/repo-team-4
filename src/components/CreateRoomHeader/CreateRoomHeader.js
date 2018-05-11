@@ -16,7 +16,7 @@ class CreateRoomHeader extends React.Component {
 
     render() {
         return (
-            <div className="CreateRoomHeader">
+            <div className="create-room-header">
                 <div className="button button-1" onClick={() => this.clickLeftButtonHandler()}>
                     <i className='fa fa-arrow-left'/>
                 </div>

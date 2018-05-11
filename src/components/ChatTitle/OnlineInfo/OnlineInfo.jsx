@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import "./OnlineInfo.css";
 
 export class OnlineInfo extends React.Component {
     render() {

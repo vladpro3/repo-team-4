@@ -16,7 +16,7 @@ class ChatList extends React.Component {
         if (this.props.loading)
             return <Spinner/>;
         return (
-            <div className='chatList'>
+            <div className='chat-list'>
                 {this.props.rooms.map((room, index) => (
                     <ListItem key={index}
                         sizeAvatar={"small"}

@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import "./ChatTitle.css";
 import ChatName from "./ChatName/ChatName";
 
 export class ChatTitle extends React.Component {

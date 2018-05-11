@@ -1,4 +1,4 @@
-.chatList{
+.chat-list{
     height: calc(100vh - 130px);
     margin-top: 68px;
     overflow-y: scroll;

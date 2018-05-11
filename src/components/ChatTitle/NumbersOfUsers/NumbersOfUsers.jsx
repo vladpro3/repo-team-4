@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import "./NumberOfUsers.css";
 
 export class NumberOfUsers extends React.Component {
     state = {

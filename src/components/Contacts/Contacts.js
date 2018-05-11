@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import "./Contacts.css";
 import "../ContactItem/ContactItem";
 import ContactsList from "../ContactsList/ContactsList";
 import {HeaderTemplate} from "../HeaderTemplate/HeaderTemplate";
