@@ -1,0 +1,3 @@
+#!/bin/bash
+docker tag repo-team-4 registry.heroku.com/repo-team-4/web
+docker push registry.heroku.com/repo-team-4/web

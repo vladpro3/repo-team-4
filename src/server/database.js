@@ -44,7 +44,7 @@ function startLocalDatabase(port) {
  * @return {Promise<Db>}
  */
 function createConnection(config) {
-    return mongo.connect(createDatabaseUri(config))
+    return mongo.connect(createDatabaseUri(config), { useNewUrlParser: true })
         .then((client) => {
             return client.db(config.database);
         });
